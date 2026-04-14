@@ -6,8 +6,10 @@ const mongoose = require('mongoose');
 const investrouter = require('./routes/userRoute');
 const uploadInvestmentProof = require('./routes/investmentRoutes')
 const withdrawalRoutes = require('./routes/withdrawalRoutes')
-require('./utlis/ROI_Transfer');
 dotenv.config();
+console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("EMAIL_PASS:", process.env.EMAIL_PASS);
+require('./utlis/ROI_Transfer');
 
 mongoose.connect(process.env.MONGO_URI).then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("Mongo Error:", err));
@@ -16,6 +18,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/investment', investrouter);
