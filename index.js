@@ -16,10 +16,7 @@ mongoose.connect(process.env.MONGO_URI).then(() => console.log("MongoDB Connecte
 
 const app = express();
 
-app.use(cors({
-  origin: "https://mlm-frontend-roan.vercel.app/",
-  Credential: true
-}
+app.use(cors(
 ));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
